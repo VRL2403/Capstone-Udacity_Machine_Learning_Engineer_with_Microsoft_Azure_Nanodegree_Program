@@ -9,8 +9,6 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.core import Workspace, Dataset
-from impyute.imputation.cs import fast_knn
-import sys
 from sklearn.preprocessing import StandardScaler
 
 run = Run.get_context()
@@ -32,19 +30,6 @@ def main():
     # split data to train and test sets
     dataset = Dataset.get_by_name(ws, name='diabetes')
     dataset = dataset.to_pandas_dataframe()
-
-    # Replacing ‘0’ value in below columns by NaN.
-    dataset[['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']] = dataset[[
-        'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']].replace(0, np.NaN)
-
-    sys.setrecursionlimit(100000)  # Increase the recursion limit of the OS
-    # start the KNN training
-    imputed_training = fast_knn(
-        dataset[['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']].values, k=30)
-    df_t1 = pd.DataFrame(imputed_training, columns=[
-                         'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI'])
-    dataset[['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']] = df_t1[[
-        'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']]
 
     # Scaling data
     scaler = StandardScaler()
