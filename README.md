@@ -113,6 +113,8 @@ Overview of the `automl` settings and configuration settings experiment:
 
 ![Best Model AutoML](/images/Best_Model_AutoML.PNG)
 
+![Best Model Parameter and Completion Status](/images/Best_Model_Parameter_and_Model_Completion_Status.PNG)
+
 - `RunDetails` widget of best model screenshot 
 
 ![Run Details AutoML](/images/Run_Details_AutoML.PNG)
@@ -202,4 +204,9 @@ service.wait_for_deployment(show_output=True)
 
 Following is link to Projects Demonstration Screen Recording [link](https://youtu.be/K5tPVB-LOxw)
 
+---
 
+### Future improvements:
+1. Performing some feature engineering on data, like some records in the datasets are hypotheical like number of pregnecies 15 and 17, also SkinThickness For adults, the standard normal values for triceps skinfolds are: 2.5mm (men) or about 20% fat; 18.0mm (women) or about 30% fat, so such outliers or mistakes done while collecting data can be removed to improve the prediction.
+2. Trained the dataset using different models like KNN or Neural Networks.
+3. In case of AutoML, we can try Interchanging n_cross_validations value between (2 till 7) and see if the prediction accuracy improved by tuning this parameter.
